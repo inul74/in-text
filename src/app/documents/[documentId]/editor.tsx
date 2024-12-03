@@ -2,13 +2,32 @@
 
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+import ImageResize from "tiptap-extension-resize-image";
 
 const TipTapEditor = dynamic(
   async () => {
-    const [useEditor, EditorContent, StarterKit] = await Promise.all([
+    const [
+      useEditor,
+      EditorContent,
+      StarterKit,
+      TaskItem,
+      TaskList,
+      Table,
+      TableRow,
+      TableCell,
+      TableHeader,
+      Image,
+    ] = await Promise.all([
       import("@tiptap/react").then((mod) => mod.useEditor),
       import("@tiptap/react").then((mod) => mod.EditorContent),
       import("@tiptap/starter-kit").then((mod) => mod.default),
+      import("@tiptap/extension-task-item").then((mod) => mod.default),
+      import("@tiptap/extension-task-list").then((mod) => mod.default),
+      import("@tiptap/extension-table").then((mod) => mod.default),
+      import("@tiptap/extension-table-row").then((mod) => mod.default),
+      import("@tiptap/extension-table-cell").then((mod) => mod.default),
+      import("@tiptap/extension-table-header").then((mod) => mod.default),
+      import("@tiptap/extension-image").then((mod) => mod.default),
     ]);
 
     return function Editor() {
@@ -20,8 +39,33 @@ const TipTapEditor = dynamic(
               "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl mx-auto focus:outline-none print:border-0 bg-white border border-[#C7C7C7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text",
           },
         },
-        extensions: [StarterKit],
-        content: `<p>Hi there! 👋</p>`,
+        extensions: [
+          StarterKit,
+          Image,
+          ImageResize,
+          Table,
+          TableRow,
+          TableCell,
+          TableHeader,
+          TaskItem.configure({ nested: true }),
+          TaskList,
+        ],
+        content: `
+        <table>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th colspan="3">Description</th>
+            </tr>
+            <tr>
+              <td>Cyndi Lauper</td>
+              <td>Singer</td>
+              <td>Songwriter</td>
+              <td>Actress</td>
+            </tr>
+          </tbody>
+        </table>
+      `,
       });
       return (
         <div className="size-full overflow-x-auto bg-[#F9FBFD] px-4 print:p-0 print:bg-white print:overflow-visible">

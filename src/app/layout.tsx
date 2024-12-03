@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "inText",
+  title: "inText | inuldev",
   description: "inuldev Text editor workspace",
   icons: [
     {
