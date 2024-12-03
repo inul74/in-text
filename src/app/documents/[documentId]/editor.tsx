@@ -18,7 +18,7 @@ const TipTapEditor = dynamic(
       TableRow,
       TableCell,
       TableHeader,
-      // Image,
+      Underline,
     ] = await Promise.all([
       import("@tiptap/react").then((mod) => mod.useEditor),
       import("@tiptap/react").then((mod) => mod.EditorContent),
@@ -29,6 +29,7 @@ const TipTapEditor = dynamic(
       import("@tiptap/extension-table-row").then((mod) => mod.default),
       import("@tiptap/extension-table-cell").then((mod) => mod.default),
       import("@tiptap/extension-table-header").then((mod) => mod.default),
+      import("@tiptap/extension-underline").then((mod) => mod.default),
       import("@tiptap/extension-image").then((mod) => mod.default),
     ]);
 
@@ -70,14 +71,14 @@ const TipTapEditor = dynamic(
         },
         extensions: [
           StarterKit,
-          // Image,
-          ImageResize,
+          TaskList,
+          TaskItem.configure({ nested: true }),
           Table,
           TableRow,
           TableCell,
           TableHeader,
-          TaskItem.configure({ nested: true }),
-          TaskList,
+          Underline,
+          ImageResize,
         ],
         content: `
         <table>
