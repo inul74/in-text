@@ -20,6 +20,15 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+---
+
+## ⭐DO NOT FORGET TO STAR THIS REPO⭐
+
+---
+
+If you want to learn how to create it please follow below tutorial👇:
+➡ Tutorial Link 💚 "Code With Antonio" Youtube Channel: [Build a Real-Time Google Docs Clone With Next 15, React, Tailwind (2024)](https://www.youtube.com/watch?v=gq2bbDmSokU)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
