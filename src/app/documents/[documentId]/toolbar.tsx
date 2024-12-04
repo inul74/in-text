@@ -44,17 +44,20 @@ const HighlightColorButton = () => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal>
       <DropdownMenuTrigger asChild>
         <button
           className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
           aria-label="Select highlight color"
+          type="button"
         >
           <HighlighterIcon className="size-4" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-0">
-        <SketchPicker color={value} onChange={onChange} />
+      <DropdownMenuContent className="p-0" sideOffset={5}>
+        <div role="dialog" aria-label="Color picker">
+          <SketchPicker color={value} onChange={onChange} />
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -70,18 +73,21 @@ const TextColorButton = () => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal>
       <DropdownMenuTrigger asChild>
         <button
           className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
           aria-label="Select text color"
+          type="button"
         >
           <span className="text-xs">A</span>
           <div className="h-0.5 w-full" style={{ backgroundColor: value }} />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-0">
-        <SketchPicker color={value} onChange={onChange} />
+      <DropdownMenuContent className="p-0" sideOffset={5}>
+        <div role="dialog" aria-label="Color picker">
+          <SketchPicker color={value} onChange={onChange} />
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -110,42 +116,47 @@ const HeadingLevelButton = () => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal>
       <DropdownMenuTrigger asChild>
         <button
           className="h-7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
           aria-label="Select heading level"
+          type="button"
         >
           <span className="truncate">{getCurrentHeading()}</span>
           <ChevronDownIcon className="ml-2 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
-        {headings.map(({ label, value, fontSize }) => (
-          <button
-            key={value}
-            style={{ fontSize }}
-            onClick={() => {
-              if (value === 0) {
-                editor?.chain().focus().setParagraph().run();
-              } else {
-                editor
-                  ?.chain()
-                  .focus()
-                  .toggleHeading({ level: value as Level })
-                  .run();
-              }
-            }}
-            className={cn(
-              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              (value === 0 && !editor?.isActive("heading")) ||
-                (editor?.isActive("heading", { level: value }) &&
-                  "bg-neutral-200/80")
-            )}
-          >
-            {label}
-          </button>
-        ))}
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1" sideOffset={5}>
+        <div role="menu">
+          {headings.map(({ label, value, fontSize }) => (
+            <button
+              key={value}
+              style={{ fontSize }}
+              onClick={() => {
+                if (value === 0) {
+                  editor?.chain().focus().setParagraph().run();
+                } else {
+                  editor
+                    ?.chain()
+                    .focus()
+                    .toggleHeading({ level: value as Level })
+                    .run();
+                }
+              }}
+              className={cn(
+                "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+                (value === 0 && !editor?.isActive("heading")) ||
+                  (editor?.isActive("heading", { level: value }) &&
+                    "bg-neutral-200/80")
+              )}
+              role="menuitem"
+              aria-label={label}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -163,11 +174,12 @@ const FontFamilyButton = () => {
   ];
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal>
       <DropdownMenuTrigger asChild>
         <button
           className="h-7 w-[120px] shrink-0 flex items-center justify-between rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
           aria-label="Select font family"
+          type="button"
         >
           <span className="truncate">
             {editor?.getAttributes("textStyle").fontFamily || "Arial"}
@@ -175,23 +187,25 @@ const FontFamilyButton = () => {
           <ChevronDownIcon className="ml-2 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
-        {fonts.map(({ label, value }) => (
-          <button
-            key={value}
-            onClick={() => editor?.chain().focus().setFontFamily(value).run()}
-            className={cn(
-              "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              editor?.getAttributes("textStyle").fontFamily === value &&
-                "bg-neutral-200/80"
-            )}
-            style={{ fontFamily: value }}
-            role="menuitem"
-            aria-label={`Set font to ${label}`}
-          >
-            <span className="text-sm">{label}</span>
-          </button>
-        ))}
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1" sideOffset={5}>
+        <div role="menu">
+          {fonts.map(({ label, value }) => (
+            <button
+              key={value}
+              onClick={() => editor?.chain().focus().setFontFamily(value).run()}
+              className={cn(
+                "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
+                editor?.getAttributes("textStyle").fontFamily === value &&
+                  "bg-neutral-200/80"
+              )}
+              style={{ fontFamily: value }}
+              role="menuitem"
+              aria-label={`Set font to ${label}`}
+            >
+              <span className="text-sm">{label}</span>
+            </button>
+          ))}
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -210,6 +224,7 @@ const ToolbarButton = ({
         isActive && "bg-neutral-200/80"
       )}
       aria-label="Format text"
+      type="button"
     >
       <Icon className="size-4" />
     </button>
@@ -289,7 +304,7 @@ export const Toolbar = () => {
       {
         label: "Comment",
         icon: MessageSquarePlusIcon,
-        onClick: () => console.log("TODO:Comment"),
+        onClick: () => {},
         isActive: false, // TODO: Enable this functionality
       },
       {
