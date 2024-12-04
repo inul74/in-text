@@ -24,6 +24,7 @@ const TipTapEditor = dynamic(
       TextStyle,
       Color,
       Highlight,
+      TextAlign,
     ] = await Promise.all([
       import("@tiptap/react").then((mod) => mod.useEditor),
       import("@tiptap/react").then((mod) => mod.EditorContent),
@@ -35,11 +36,12 @@ const TipTapEditor = dynamic(
       import("@tiptap/extension-table-cell").then((mod) => mod.default),
       import("@tiptap/extension-table-row").then((mod) => mod.default),
       import("@tiptap/extension-link").then((mod) => mod.default),
-      import("@tiptap/extension-color").then((mod) => mod.default),
-      import("@tiptap/extension-highlight").then((mod) => mod.default),
       import("@tiptap/extension-font-family").then((mod) => mod.default),
       import("@tiptap/extension-text-style").then((mod) => mod.default),
       import("@tiptap/extension-underline").then((mod) => mod.default),
+      import("@tiptap/extension-color").then((mod) => mod.default),
+      import("@tiptap/extension-highlight").then((mod) => mod.default),
+      import("@tiptap/extension-text-align").then((mod) => mod.default),
       import("@tiptap/extension-image").then((mod) => mod.default),
     ]);
 
@@ -104,6 +106,9 @@ const TipTapEditor = dynamic(
           } as any),
           TaskItem,
           ImageResize,
+          TextAlign.configure({
+            types: ["heading", "paragraph"],
+          } as any),
         ],
         content: `
         <table>
