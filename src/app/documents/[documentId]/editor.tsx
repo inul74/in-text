@@ -21,6 +21,8 @@ const TipTapEditor = dynamic(
       Underline,
       FontFamily,
       TextStyle,
+      Color,
+      Highlight,
     ] = await Promise.all([
       import("@tiptap/react").then((mod) => mod.useEditor),
       import("@tiptap/react").then((mod) => mod.EditorContent),
@@ -34,6 +36,8 @@ const TipTapEditor = dynamic(
       import("@tiptap/extension-underline").then((mod) => mod.default),
       import("@tiptap/extension-font-family").then((mod) => mod.default),
       import("@tiptap/extension-text-style").then((mod) => mod.default),
+      import("@tiptap/extension-color").then((mod) => mod.default),
+      import("@tiptap/extension-highlight").then((mod) => mod.default),
       import("@tiptap/extension-image").then((mod) => mod.default),
     ]);
 
@@ -84,6 +88,8 @@ const TipTapEditor = dynamic(
           Underline,
           FontFamily,
           TextStyle,
+          Color,
+          Highlight.configure({ multicolor: true }),
           ImageResize,
         ],
         content: `
