@@ -1,10 +1,11 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Suspense } from "react";
-import ImageResize from "tiptap-extension-resize-image";
+import dynamic from "next/dynamic";
 
 import { useEditorStore } from "@/store/use-editor-store";
+import { FontSizeExtension } from "@/extensions/font-size";
+import { LineHeightExtension } from "@/extensions/line-height";
 
 const TipTapEditor = dynamic(
   async () => {
@@ -25,6 +26,7 @@ const TipTapEditor = dynamic(
       Color,
       Highlight,
       TextAlign,
+      ImageResize,
     ] = await Promise.all([
       import("@tiptap/react").then((mod) => mod.useEditor),
       import("@tiptap/react").then((mod) => mod.EditorContent),
@@ -42,7 +44,7 @@ const TipTapEditor = dynamic(
       import("@tiptap/extension-color").then((mod) => mod.default),
       import("@tiptap/extension-highlight").then((mod) => mod.default),
       import("@tiptap/extension-text-align").then((mod) => mod.default),
-      import("@tiptap/extension-image").then((mod) => mod.default),
+      import("tiptap-extension-resize-image").then((mod) => mod.default),
     ]);
 
     return function Editor() {
@@ -83,6 +85,8 @@ const TipTapEditor = dynamic(
         },
         extensions: [
           StarterKit,
+          LineHeightExtension,
+          FontSizeExtension,
           Link.configure({
             openOnClick: false,
             autolink: true,
