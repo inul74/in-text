@@ -1,34 +1,33 @@
 "use client";
 
-import {
-  AlignCenterIcon,
-  AlignJustifyIcon,
-  AlignLeftIcon,
-  AlignRightIcon,
-  BoldIcon,
-  ChevronDownIcon,
-  HighlighterIcon,
-  ImageIcon,
-  ItalicIcon,
-  Link2Icon,
-  ListCollapseIcon,
-  ListIcon,
-  ListOrderedIcon,
-  ListTodoIcon,
-  LucideIcon,
-  MessageSquarePlusIcon,
-  MinusIcon,
-  PlusIcon,
-  PrinterIcon,
-  Redo2Icon,
-  RemoveFormattingIcon,
-  SearchIcon,
-  SpellCheckIcon,
-  UnderlineIcon,
-  Undo2Icon,
-  UploadIcon,
-} from "lucide-react";
 import { useState } from "react";
+import { IconType } from "react-icons";
+import { FaCaretDown } from "react-icons/fa";
+import { TbLineHeight } from "react-icons/tb";
+import { GrUndo, GrRedo } from "react-icons/gr";
+import { AiOutlineSearch } from "react-icons/ai";
+import { BiCommentAdd, BiUnderline } from "react-icons/bi";
+import { FiMinus, FiPlus, FiPrinter } from "react-icons/fi";
+import {
+  MdChecklist,
+  MdSpellcheck,
+  MdFormatClear,
+  MdOutlineLink,
+  MdOutlineImage,
+  MdOutlineFileUpload,
+  MdOutlineFormatBold,
+  MdOutlineFormatItalic,
+} from "react-icons/md";
+import {
+  FaList,
+  FaListOl,
+  FaListUl,
+  FaAlignLeft,
+  FaAlignCenter,
+  FaAlignRight,
+  FaAlignJustify,
+} from "react-icons/fa";
+import { HighlighterIcon } from "lucide-react";
 import { type Level } from "@tiptap/extension-heading";
 import { type ColorResult, SketchPicker } from "react-color";
 
@@ -48,9 +47,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/use-editor-store";
 
 const LineHeightButton = () => {
@@ -68,11 +67,12 @@ const LineHeightButton = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="flex h-7 min-w-7 shrink-0 flex-col items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm hover:bg-neutral-200/80"
+          className="flex h-7 min-w-7 shrink-0 items-center justify-center overflow-hidden rounded-sm px-1.5 text-sm hover:bg-neutral-200/80"
           aria-label="Select line height"
           type="button"
         >
-          <ListCollapseIcon className="size-4" />
+          <TbLineHeight className="size-4" />
+          <FaCaretDown className="ml-1 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="flex flex-col gap-y-1 p-1">
@@ -153,7 +153,7 @@ const FontSizeButton = () => {
         aria-label="Decrease font size"
         type="button"
       >
-        <MinusIcon className="size-4" />
+        <FiMinus className="size-4" />
       </button>
       {isEditing ? (
         <input
@@ -188,7 +188,7 @@ const FontSizeButton = () => {
         aria-label="Increase font size"
         type="button"
       >
-        <PlusIcon className="size-4" />
+        <FiPlus className="size-4" />
       </button>
     </div>
   );
@@ -200,13 +200,13 @@ const ListButton = () => {
   const lists = [
     {
       label: "Bullet List",
-      icon: ListIcon,
+      icon: FaListUl,
       isActive: () => editor?.isActive("bulletList"),
       onClick: () => editor?.chain().focus().toggleBulletList().run(),
     },
     {
       label: "Ordered List",
-      icon: ListOrderedIcon,
+      icon: FaListOl,
       isActive: () => editor?.isActive("orderedList"),
       onClick: () => editor?.chain().focus().toggleOrderedList().run(),
     },
@@ -216,11 +216,12 @@ const ListButton = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+          className="h-7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
           aria-label="Select list type"
           type="button"
         >
-          <ListIcon className="size-4" />
+          <FaList className="size-4" />
+          <FaCaretDown className="ml-1 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
@@ -251,22 +252,22 @@ const AlignButton = () => {
     {
       label: "Align Left",
       value: "left",
-      icon: AlignLeftIcon,
+      icon: FaAlignLeft,
     },
     {
       label: "Align Center",
       value: "center",
-      icon: AlignCenterIcon,
+      icon: FaAlignCenter,
     },
     {
       label: "Align Right",
       value: "right",
-      icon: AlignRightIcon,
+      icon: FaAlignRight,
     },
     {
       label: "Align Justify",
       value: "justify",
-      icon: AlignJustifyIcon,
+      icon: FaAlignJustify,
     },
   ];
 
@@ -274,11 +275,12 @@ const AlignButton = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+          className="h-7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
           aria-label="Select highlight color"
           type="button"
         >
-          <AlignLeftIcon className="size-4" />
+          <FaAlignLeft className="size-4" />
+          <FaCaretDown className="ml-1 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
@@ -340,11 +342,11 @@ const ImageButton = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
-            className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
             aria-label="Insert image"
             type="button"
           >
-            <ImageIcon className="size-4" />
+            <MdOutlineImage className="size-4" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent sideOffset={5}>
@@ -352,14 +354,14 @@ const ImageButton = () => {
             onSelect={onUpload}
             className="hover:!bg-neutral-200/80 focus:bg-neutral-200/80"
           >
-            <UploadIcon className="size-4" />
+            <MdOutlineFileUpload className="size-4" />
             <p className="text-xs text-neutral-700">Upload</p>
           </DropdownMenuItem>
           <DropdownMenuItem
             onSelect={() => setIsDialogOpen(true)}
             className="hover:!bg-neutral-200/80 focus:bg-neutral-200/80"
           >
-            <SearchIcon className="size-4" />
+            <AiOutlineSearch className="size-4" />
             <p className="text-xs text-blue-600 underline">Image Url</p>
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -425,7 +427,7 @@ const LinkButton = () => {
           aria-label="Link"
           type="button"
         >
-          <Link2Icon className="size-4" />
+          <MdOutlineLink className="size-4" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-2.5 flex items-center gap-x-2">
@@ -463,6 +465,7 @@ const HighlightColorButton = () => {
           type="button"
         >
           <HighlighterIcon className="size-4" />
+          <div className="h-0.5 w-full" style={{ backgroundColor: value }} />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-0" sideOffset={5}>
@@ -535,7 +538,7 @@ const HeadingLevelButton = () => {
           type="button"
         >
           <span className="truncate">{getCurrentHeading()}</span>
-          <ChevronDownIcon className="ml-2 size-4 shrink-0" />
+          <FaCaretDown className="ml-1 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1" sideOffset={5}>
@@ -595,7 +598,7 @@ const FontFamilyButton = () => {
           <span className="truncate">
             {editor?.getAttributes("textStyle").fontFamily || "Arial"}
           </span>
-          <ChevronDownIcon className="ml-2 size-4 shrink-0" />
+          <FaCaretDown className="ml-1 size-4 shrink-0" />
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1" sideOffset={5}>
@@ -625,7 +628,7 @@ const FontFamilyButton = () => {
 interface ToolbarButtonProps {
   onClick?: () => void;
   isActive?: boolean;
-  icon: LucideIcon;
+  icon: IconType;
 }
 
 const ToolbarButton = ({
@@ -653,35 +656,35 @@ export const Toolbar = () => {
 
   const sections: {
     label: string;
-    icon: LucideIcon;
+    icon: IconType;
     onClick?: () => void;
     isActive?: boolean;
   }[][] = [
     [
       {
         label: "Undo",
-        icon: Undo2Icon,
+        icon: GrUndo,
         onClick: () => {
           editor?.chain().focus().undo().run();
         },
       },
       {
         label: "Redo",
-        icon: Redo2Icon,
+        icon: GrRedo,
         onClick: () => {
           editor?.chain().focus().redo().run();
         },
       },
       {
         label: "Print",
-        icon: PrinterIcon,
+        icon: FiPrinter,
         onClick: () => {
           window.print();
         },
       },
       {
         label: "Spell Check",
-        icon: SpellCheckIcon,
+        icon: MdSpellcheck,
         onClick: () => {
           const current = editor?.view.dom.getAttribute("spellcheck");
           editor?.view.dom.setAttribute(
@@ -694,7 +697,7 @@ export const Toolbar = () => {
     [
       {
         label: "Bold",
-        icon: BoldIcon,
+        icon: MdOutlineFormatBold,
         isActive: editor?.isActive("bold"),
         onClick: () => {
           editor?.chain().focus().toggleBold().run();
@@ -702,7 +705,7 @@ export const Toolbar = () => {
       },
       {
         label: "Italic",
-        icon: ItalicIcon,
+        icon: MdOutlineFormatItalic,
         isActive: editor?.isActive("italic"),
         onClick: () => {
           editor?.chain().focus().toggleItalic().run();
@@ -710,7 +713,7 @@ export const Toolbar = () => {
       },
       {
         label: "Underline",
-        icon: UnderlineIcon,
+        icon: BiUnderline,
         isActive: editor?.isActive("underline"),
         onClick: () => {
           editor?.chain().focus().toggleUnderline().run();
@@ -720,19 +723,19 @@ export const Toolbar = () => {
     [
       {
         label: "Comment",
-        icon: MessageSquarePlusIcon,
+        icon: BiCommentAdd,
         onClick: () => {},
         isActive: false, // TODO: Enable this functionality
       },
       {
         label: "List Todo",
-        icon: ListTodoIcon,
+        icon: MdChecklist,
         onClick: () => editor?.chain().focus().toggleTaskList().run(),
         isActive: editor?.isActive("taskList"),
       },
       {
         label: "Remove Formatting",
-        icon: RemoveFormattingIcon,
+        icon: MdFormatClear,
         onClick: () => editor?.chain().focus().unsetAllMarks().run(),
       },
     ],

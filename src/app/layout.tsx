@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   description: "inuldev Text editor workspace",
   icons: [
     {
-      url: "/intext.svg",
-      href: "/intext.svg",
+      url: "/logo.svg",
+      href: "/logo.svg",
     },
   ],
 };
