@@ -101,7 +101,6 @@ export const Navbar = () => {
               width: "36px",
               height: "36px",
             }}
-            priority
           />
         </Link>
         <div className="flex flex-col">
@@ -214,6 +213,143 @@ export const Navbar = () => {
                         5 x 5
                       </MenubarItem>
                     </MenubarSubContent>
+                  </MenubarSub>
+                  <MenubarSub>
+                    <MenubarSubTrigger>Add Column</MenubarSubTrigger>
+                    <MenubarSubContent>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().addColumnBefore().run()
+                        }
+                        disabled={!editor?.can().addColumnBefore()}
+                      >
+                        Add column before
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().addColumnAfter().run()
+                        }
+                        disabled={!editor?.can().addColumnAfter()}
+                      >
+                        Add column after
+                      </MenubarItem>
+                    </MenubarSubContent>
+                  </MenubarSub>
+                  <MenubarSub>
+                    <MenubarSubTrigger>Add Row</MenubarSubTrigger>
+                    <MenubarSubContent>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().addRowBefore().run()
+                        }
+                        disabled={!editor?.can().addRowBefore()}
+                      >
+                        Add row before
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().addRowAfter().run()
+                        }
+                        disabled={!editor?.can().addRowAfter()}
+                      >
+                        Add row after
+                      </MenubarItem>
+                    </MenubarSubContent>
+                  </MenubarSub>
+                  <MenubarSub>
+                    <MenubarSubTrigger>Delete</MenubarSubTrigger>
+                    <MenubarSubContent>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().deleteColumn().run()
+                        }
+                        disabled={!editor?.can().deleteColumn()}
+                      >
+                        Delete column
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().deleteRow().run()
+                        }
+                        disabled={!editor?.can().deleteRow()}
+                      >
+                        Delete row
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().deleteTable().run()
+                        }
+                        disabled={!editor?.can().deleteTable()}
+                      >
+                        Delete table
+                      </MenubarItem>
+                    </MenubarSubContent>
+                  </MenubarSub>
+                  <MenubarSub>
+                    <MenubarSubTrigger>Cells</MenubarSubTrigger>
+                    <MenubarSubContent>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().mergeCells().run()
+                        }
+                        disabled={!editor?.can().mergeCells()}
+                      >
+                        Merge cells
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().splitCell().run()
+                        }
+                        disabled={!editor?.can().splitCell()}
+                      >
+                        Split cell
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().mergeOrSplit().run()
+                        }
+                        disabled={!editor?.can().mergeOrSplit()}
+                      >
+                        Merge or split
+                      </MenubarItem>
+                    </MenubarSubContent>
+                  </MenubarSub>
+                  <MenubarSub>
+                    <MenubarSubTrigger>Header Toggle</MenubarSubTrigger>
+                    <MenubarSubContent>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().toggleHeaderColumn().run()
+                        }
+                        disabled={!editor?.can().toggleHeaderColumn()}
+                      >
+                        Toggle header column
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().toggleHeaderRow().run()
+                        }
+                        disabled={!editor?.can().toggleHeaderRow()}
+                      >
+                        Toggle header row
+                      </MenubarItem>
+                      <MenubarItem
+                        onClick={() =>
+                          editor?.chain().focus().toggleHeaderCell().run()
+                        }
+                        disabled={!editor?.can().toggleHeaderCell()}
+                      >
+                        Toggle header cell
+                      </MenubarItem>
+                    </MenubarSubContent>
+                  </MenubarSub>
+                  <MenubarSub>
+                    <MenubarItem
+                      onClick={() => editor?.chain().focus().fixTables().run()}
+                      disabled={!editor?.can().fixTables()}
+                    >
+                      Fix tables
+                    </MenubarItem>
                   </MenubarSub>
                 </MenubarContent>
               </MenubarMenu>
