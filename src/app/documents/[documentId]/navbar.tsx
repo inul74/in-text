@@ -39,6 +39,7 @@ import {
 
 import { useEditorStore } from "@/store/use-editor-store";
 
+import { Inbox } from "./inbox";
 import { Avatars } from "./avatars";
 import { DocumentInput } from "./document-input";
 
@@ -417,6 +418,7 @@ export const Navbar = () => {
       </div>
       <div className="flex gap-3 items-center pl-6">
         <Avatars />
+        <Inbox />
         <OrganizationSwitcher
           afterCreateOrganizationUrl="/"
           afterLeaveOrganizationUrl="/"
