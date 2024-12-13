@@ -16,13 +16,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "inText | inulDev",
   description: "inuldev Text editor workspace",
-  icons: [
-    {
-      url: "/logo.svg",
-      href: "/logo.svg",
-      type: "image/svg+xml",
-    },
-  ],
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

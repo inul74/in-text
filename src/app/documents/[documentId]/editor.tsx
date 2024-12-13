@@ -75,7 +75,7 @@ export const Editor = ({ initialContent }: EditorProps) => {
       attributes: {
         style: `padding-left: ${leftMargin}px; padding-right: ${rightMargin}px`,
         class:
-          "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl mx-auto focus:outline-none print:border-0 bg-white border border-[#C7C7C7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text",
+          "focus:outline-none print:border-0 bg-white border border-[#C7C7C7] flex flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text",
       },
     },
     extensions: [
@@ -100,17 +100,17 @@ export const Editor = ({ initialContent }: EditorProps) => {
       FontFamily,
       TextStyle,
       Underline,
+      ImageResize,
       Table.configure({
         resizable: true,
       }),
       TableCell,
       TableHeader,
       TableRow,
-      TaskList,
       TaskItem.configure({
         nested: true,
       }),
-      ImageResize,
+      TaskList,
     ],
     content: ``,
     autofocus: true,
